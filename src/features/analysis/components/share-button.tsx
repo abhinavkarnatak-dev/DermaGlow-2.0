@@ -83,16 +83,15 @@ export function ShareButton({ title }: { title: string }) {
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            className="fixed inset-0 z-50 grid place-items-center p-5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div
+          <motion.div className="fixed inset-0 z-50 grid place-items-center p-5">
+            <motion.div
               className="absolute inset-0 bg-background/70 backdrop-blur-sm"
               onClick={close}
               aria-hidden
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             />
             <motion.div
               role="dialog"
