@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { InstallButton } from "@/components/install-button";
 import { Button } from "@/components/ui/button";
 
 export function SiteHeader({ showCta = true }: { showCta?: boolean }) {
@@ -11,6 +12,7 @@ export function SiteHeader({ showCta = true }: { showCta?: boolean }) {
           <Logo />
         </Link>
         <div className="flex items-center gap-2 sm:gap-3">
+          <InstallButton />
           <ThemeToggle />
           {showCta && (
             <Link href="/analyze" className="hidden sm:block">

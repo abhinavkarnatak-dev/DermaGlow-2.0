@@ -91,9 +91,12 @@ export default function AnalyzePage() {
   };
 
   // Faux progress + rotating status while the request is in flight.
+  // Also lock body scroll so the blurred page behind the overlay cannot move.
   React.useEffect(() => {
     if (status !== "submitting") return;
     setProgress(8);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const p = setInterval(() => {
       setProgress((v) => (v >= 92 ? v : v + Math.max(1, (95 - v) * 0.08)));
     }, 320);
@@ -104,6 +107,7 @@ export default function AnalyzePage() {
     return () => {
       clearInterval(p);
       clearInterval(m);
+      document.body.style.overflow = prevOverflow;
     };
   }, [status]);
 
