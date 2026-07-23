@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { PwaRegister } from "@/components/pwa-register";
 import { publicEnv } from "@/lib/env";
@@ -71,6 +72,7 @@ export default function RootLayout({
           {children}
           <PwaRegister />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
