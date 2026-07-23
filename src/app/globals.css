@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (driven by next-themes). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  DermaGlow palette - "porcelain and botanicals".
+  Warm cream backgrounds, a deep eucalyptus primary, and a soft apricot glow.
+  Light and dark are tuned independently, not inverted.
+*/
+:root {
+  --background: #fbf6f0;
+  --surface: #ffffff;
+  --surface-2: #f5ede3;
+  --border: #e8dccd;
+  --border-strong: #dccbb6;
+  --foreground: #2b2622;
+  --muted: #7c6f61;
+  --primary: #2f5d50;
+  --primary-hover: #274c42;
+  --primary-foreground: #fbf6f0;
+  --accent: #d9825f;
+  --accent-soft: #f3d9cb;
+  --accent-foreground: #ffffff;
+  --ring: #2f5d50;
+  --glow-from: #f3b98f;
+  --glow-to: #e08a9a;
+  --good: #3f7d68;
+  --warn: #cf8a4a;
+
+  --shadow-soft: 0 1px 2px rgba(43, 38, 34, 0.04),
+    0 8px 24px -12px rgba(43, 38, 34, 0.12);
+  --shadow-lift: 0 2px 4px rgba(43, 38, 34, 0.05),
+    0 24px 48px -20px rgba(43, 38, 34, 0.22);
+}
+
+.dark {
+  --background: #141110;
+  --surface: #1d1917;
+  --surface-2: #262019;
+  --border: #362e27;
+  --border-strong: #46392f;
+  --foreground: #f1e8dd;
+  --muted: #a99a89;
+  --primary: #83b6a4;
+  --primary-hover: #96c3b3;
+  --primary-foreground: #12100e;
+  --accent: #e79c7e;
+  --accent-soft: #3a2a24;
+  --accent-foreground: #16110f;
+  --ring: #83b6a4;
+  --glow-from: #e79c7e;
+  --glow-to: #d98098;
+  --good: #7fb9a4;
+  --warn: #dda86a;
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 10px 30px -14px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.35),
+    0 30px 60px -24px rgba(0, 0, 0, 0.75);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--accent-soft);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  /* Warm ambient wash used behind hero and page tops. */
+  .bg-aura {
+    background-image:
+      radial-gradient(60% 55% at 15% 0%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 70%),
+      radial-gradient(50% 50% at 100% 10%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%);
+  }
+
+  .text-glow-gradient {
+    background-image: linear-gradient(120deg, var(--glow-from), var(--glow-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+
+  .glass {
+    background-color: color-mix(in oklab, var(--surface) 82%, transparent);
+    backdrop-filter: blur(12px) saturate(1.2);
+  }
+}
+
+/* Subtle, on-brand scrollbar. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 2px solid var(--background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
